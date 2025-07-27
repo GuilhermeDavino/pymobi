@@ -1,17 +1,38 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
-from django.contrib import messages 
+from django.contrib import messages
+from django.contrib import auth
 from django.contrib.messages import constants 
 
 # Create your views here.
 
-def auth(request):
+def home(request):
     return HttpResponse("Pegou a view de autenticação")
 
 def logar(request):
-    
-    return HttpResponse("Login view")
+    if request.method == 'GET':
+        if request.user.is_authenticated: 
+            return redirect('/')
+        return render(request, 'logar/logar.html')
+    elif request.method == 'POST':
+        username = request.POST.get('username')
+        senha = request.POST.get('senha')
+        usuario = auth.authenticate(username=username, password=senha)
+
+        if not usuario:
+            messages.add_message(request, constants.ERROR, 'Usuário ou senha inválidos!')
+            return redirect('/auth/logar')
+        else:
+            auth.login(request, usuario)
+            messages.add_message(request, constants.SUCCESS, 'Login realizado com sucesso!')
+            return redirect('/')
+
+
+
+
+
+
 
 def cadastro(request):
     if request.method == 'GET':
