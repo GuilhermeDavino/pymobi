@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+from django.contrib.messages import constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,7 +95,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'Amereca/Sao_Paulo'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -115,3 +116,13 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Django messages
+
+MESSAGE_TAGS = { 
+    constants.DEBUG: 'alert-primary', 
+    constants.ERROR: 'alert-danger', 
+    constants.SUCCESS: 'alert-success', 
+    constants.INFO: 'alert-info', 
+    constants.WARNING: 'alert-warning', 
+}
