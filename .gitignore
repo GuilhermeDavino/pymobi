@@ -1,0 +1,14 @@
+# Django
+*.venv/
+*db.sqlite3
+
+# IDE
+*.idea
+*.vscode
+*.devcontainer
+
+# ENV
+*.env
+
+
+media/
