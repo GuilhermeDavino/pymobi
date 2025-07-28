@@ -30,12 +30,10 @@ def logar(request):
 
 
 
-
-
-
-
 def cadastro(request):
     if request.method == 'GET':
+        if request.user.is_authenticated: 
+            return redirect('/')
         return render(request, 'cadastro/cadastro.html')
     elif request.method == 'POST':
         
@@ -63,4 +61,7 @@ def cadastro(request):
             return redirect('/auth/cadastro')
     
     
-    
+def sair(request):
+    auth.logout(request)
+    messages.add_message(request, constants.SUCCESS, 'Logout realizado com sucesso!')
+    return redirect('/auth/logar')
