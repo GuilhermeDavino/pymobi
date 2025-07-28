@@ -2,9 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Imovel, Cidade
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+
 
 @login_required(login_url='/auth/logar/')
 def home(request):
+
     preco_minimo = request.GET.get('preco_minimo')
     preco_maximo = request.GET.get('preco_maximo')
     cidade = request.GET.get('cidade')
@@ -27,3 +30,9 @@ def home(request):
     
     cidades = Cidade.objects.all()
     return render(request, 'home/home.html', {'imoveis': imoveis, 'cidades': cidades})
+
+
+def imovel(request, id):
+    imovel = get_object_or_404(Imovel, id=id)
+    sugestoes = Imovel.objects.filter(cidade=imovel.cidade).exclude(id=id)[:2]
+    return render(request, 'imovel/imovel.html', {'imovel': imovel, 'sugestoes': sugestoes})
