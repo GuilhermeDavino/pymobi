@@ -49,7 +49,7 @@ python manage.py createsuperuser
 ## 📸 Imagens da Aplicação
 
 ### 🔐 Tela de Login  
-![login](img/pymobi-login.png)
+![login](imgs/pymobi-login.png)
 
 ### 🏘️ Página Inicial com Filtros  
 ![home](imgs/pymobi-home.png)
